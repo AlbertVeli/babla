@@ -1,0 +1,13 @@
+Shellscript to fetch translation from sv.bab.la.
+
+EXAMPLE
+
+./svensk-engelsk.sh uppsats
+
+This will try to get the translation of the word 'uppsats'.
+If parsing is successful the output should look something like:
+
+paper {substantiv}
+essay {substantiv}
+composition {substantiv}
+article {substantiv}
