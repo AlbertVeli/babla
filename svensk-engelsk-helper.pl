@@ -15,11 +15,12 @@ $state = 0;
 
 while (defined($line = <STDIN>)) {
     if ($state == 0) {
-	if ($line =~ m/##\s*$word\s*{/) {
+	if ($line =~ m/##\s*.*$word\s*{/i) {
 	    $state = 1;
 	}
     } elsif ($state == 1) {
-	if ($line =~ m/^$word\s*{/) {
+	if ($line =~ m/$word.*{/i) {
+	    print $line;
 	    $state = 2;
 	}
     } elsif ($state == 2) {

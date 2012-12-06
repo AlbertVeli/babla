@@ -1,9 +1,18 @@
-Shellscript to fetch translation (swedish -> english) from sv.bab.la.
+Shellscript to fetch translations from bab.la.
 
+DESCRIPTION
+
+The main script is svensk-engelsk.sh which translates from
+Swedish to English. There are also a number of symbolic
+links that calls the same script but translates from
+other from-to language combinations that bab.la supports.
+To add a new combination just create a new symbolic link.
+Make sure that combination is supported by bab.la first.
 
 FILES
 
-The script calls html2text, https://github.com/aaronsw/html2text and perl.
+The script calls html2text (https://github.com/aaronsw/html2text)
+and perl, which must also be installed.
 
 
 EXAMPLE
@@ -17,3 +26,15 @@ paper {substantiv}
 essay {substantiv}
 composition {substantiv}
 article {substantiv}
+
+While the command:
+
+./engelsk-tysk.sh annotate
+
+will translate the word 'annotate' from English to German (tyska).
+
+Without a word
+
+./svensk-engelsk.sh
+
+will list all combinations.
