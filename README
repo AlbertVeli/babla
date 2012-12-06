@@ -1,4 +1,10 @@
-Shellscript to fetch translation from sv.bab.la.
+Shellscript to fetch translation (swedish -> english) from sv.bab.la.
+
+
+FILES
+
+The script calls html2text, https://github.com/aaronsw/html2text and perl.
+
 
 EXAMPLE
 
