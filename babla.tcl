@@ -17,8 +17,10 @@
 
 bind pub - !babla do_babla
 bind pub - !tyda do_tyda
-bind pub - !folkets do_folkets
-bind pub - !lexin do_folkets
+bind pub - !lexin do_folkets_sven
+bind pub - !folkets do_folkets_sven
+bind pub - !folken do_folkets_ensv
+bind pub - !folksyn do_folkets_syn
 
 proc run_trans_script { script nick chan args } {
     global lastbind
@@ -71,7 +73,17 @@ proc do_tyda { nick host hand chan args } {
     return [run_trans_script $script $nick $chan $args]
 }
 
-proc do_folkets { nick host hand chan args } {
-    set script "folkets.sh"
+proc do_folkets_sven { nick host hand chan args } {
+    set script "folkets_lexikon_sven.py"
+    return [run_trans_script $script $nick $chan $args]
+}
+
+proc do_folkets_ensv { nick host hand chan args } {
+    set script "folkets_lexikon_ensv.py"
+    return [run_trans_script $script $nick $chan $args]
+}
+
+proc do_folkets_syn { nick host hand chan args } {
+    set script "folkets_syn.py"
     return [run_trans_script $script $nick $chan $args]
 }
