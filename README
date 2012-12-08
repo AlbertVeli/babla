@@ -89,3 +89,13 @@ should have loaded babla.tcl. Add a line like this
 (change path first) to eggdrop.conf:
 
 source /home/albert/source/babla/babla.tcl
+
+DISCLAIMER
+
+It may be possible to execute unix shell commands
+by carefully studying these scripts and handcrafting
+the search string that is sent as an arg between
+scripts. I do not take responsibility for any damage
+an attacker might cause if you use any code in this
+repository. It has not been audited for security.
+But if you find a problem, feel free to report it.
