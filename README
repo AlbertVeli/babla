@@ -1,26 +1,29 @@
 Scripts to fetch translations from bab.la, tyda.se
 folkets lexikon and folkets synonymlexikon.
 
+
 DESCRIPTION
 
 The script svensk-engelsk.sh translates from Swedish
-to English. There are also a number of symlinks that
-calls the same script but translates from other from-to
-language combinations that bab.la supports. To add a new
-combination just create a new symlink.
+to English. There are also a number of symlinks to thet
+script to translates between other from-to language
+combinations. To add a new one check what combinations
+bab.la supports and create a new symlink.
 
-Another script, tyda.sh, fetches translations from tyda.se.
+To fetch translations from tyda.se, use the script tyda.sh.
 The site tries to determine source language automatically
-and translates from/to english/swedish.
+and translates from/to English/Swedish.
 
-The scripts folkets_lexikon_ensv.py, folkets_lexikon_sven.py
-and folkets_syn.py fetch translations/synonyms from local
-xml-files. Run the script update_folkets.sh to fetch the
-xml-files before running the python scripts.
+Folkets lexikon is a free Swedish English lekikon maintaned
+by KTH. http://folkets-lexikon.csc.kth.se/folkets/om.html
+The folkets_lexikon_* scripts fetch translations from
+local XML-files that can be downloaded from KTH using the
+script update_folkets.sh. And folkets_syn.py use the same
+method to fetch synonyms from folkets synonymlexikon.
 
 Finally babla.tcl is an Eggdrop script that calls the
-other scripts when commands are given in the channel the
-eggdrop bot is logged in to. The commands are:
+other scripts when commands are given in a channel the
+bot is logged on. The commands are:
 
 !babla   - svensk-engelsk.sh
 !tyda    - tyda.sh
@@ -33,16 +36,17 @@ eggdrop bot is logged in to. The commands are:
 REQUIREMENTS
 
 The scripts call:
-- html2text (https://github.com/aaronsw/html2text)
+- html2text - https://github.com/aaronsw/html2text
 - perl
-- python (2.5+ for xml parsing)
+- python (2.5+ for xml parsing, only tried with 2.7.x)
 
 
 EXAMPLES
 
+Get English translation of the word 'uppsats' from bab.la:
+
 ./svensk-engelsk.sh uppsats
 
-This will try to get the translation of the word 'uppsats'.
 If parsing is successful the output should look something like:
 
 paper {substantiv}
@@ -50,14 +54,28 @@ essay {substantiv}
 composition {substantiv}
 article {substantiv}
 
-While the command:
+Bab.la English -> German translation of 'annotate':
 
 ./engelsk-tysk.sh annotate
 
-will translate the word 'annotate' from English to German (tyska).
-
-Without a word
+List installed bab.la symlinks:
 
 ./svensk-engelsk.sh
 
-will list all from-to combinations activated.
+Folkets English -> Swedish 'exhume':
+
+./folkets_lexikon_ensv.py exhume
+
+Swedish -> English of 'matsal':
+
+./folkets_lexikon_sven.py matsal
+
+Synonyms of 'mild' from folkets synonymlexikon:
+
+./folkets_syn.py mild
+
+Autodetect language and get translation
+to English (or Swedish) from tyda.se of
+the word 'rymdraket':
+
+./tyda.sh rymdraket
