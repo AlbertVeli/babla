@@ -21,6 +21,8 @@ bind pub - !lexin do_folkets_sven
 bind pub - !folkets do_folkets_sven
 bind pub - !folken do_folkets_ensv
 bind pub - !folksyn do_folkets_syn
+bind pub - !synonymer do_synonymer
+bind pub - !syn do_synonymer
 
 proc run_trans_script { script nick chan args } {
     global lastbind
@@ -85,5 +87,10 @@ proc do_folkets_ensv { nick host hand chan args } {
 
 proc do_folkets_syn { nick host hand chan args } {
     set script "folkets_syn.py"
+    return [run_trans_script $script $nick $chan $args]
+}
+
+proc do_synonymer { nick host hand chan args } {
+    set script "synonymer.sh"
     return [run_trans_script $script $nick $chan $args]
 }
