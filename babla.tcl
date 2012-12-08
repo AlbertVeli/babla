@@ -11,23 +11,35 @@
 #
 # similarly calls: tyda.sh word
 #
+# and !lexin word calls folkets.sh
+#
 ###
 
 bind pub - !babla do_babla
 bind pub - !tyda do_tyda
+bind pub - !folkets do_folkets
+bind pub - !lexin do_folkets
 
 proc run_trans_script { script nick chan args } {
+    global lastbind
 
     # XXX: Change this to your path!
-    set path "/home/albert/source/babla"
+    set scriptdir "/home/albert/source/babla"
 
-    set script "$path/$script"
+    set scriptpath "$scriptdir/$script"
+
+    set args [join [join $args]]
+    if { [strlen $args] <= 0 } {
+	# $::lastbind is global and automatically set by eggdrop
+        putserv "PRIVMSG $chan :$nick: usage - $::lastbind <word>"
+        return 0
+    }
 
     # Try to comment out the following line if you dont
     # get results for words containing non-ascii chars.
     set args [encoding convertto utf-8 $args]
 
-    if {[catch { exec $script $args } results] } {
+    if {[catch { exec $scriptpath $args } results] } {
         putserv "PRIVMSG $chan :$nick: error fetching translation for '$args'"
     } else {
         if { [strlen $results] > 0 } {
@@ -50,27 +62,16 @@ proc run_trans_script { script nick chan args } {
 }
 
 proc do_babla { nick host hand chan args } {
-
     set script "svensk-engelsk.sh"
-
-    set args [join $args]
-    if { [strlen $args] <= 0 } {
-        putserv "PRIVMSG $chan :$nick: usage - !babla <word>"
-        return 1
-    }
-
     return [run_trans_script $script $nick $chan $args]
 }
 
 proc do_tyda { nick host hand chan args } {
-
     set script "tyda.sh"
+    return [run_trans_script $script $nick $chan $args]
+}
 
-    set args [join $args]
-    if { [strlen $args] <= 0 } {
-        putserv "PRIVMSG $chan :$nick: usage - !tyda <word>"
-        return 1
-    }
-
+proc do_folkets { nick host hand chan args } {
+    set script "folkets.sh"
     return [run_trans_script $script $nick $chan $args]
 }
