@@ -1,11 +1,10 @@
 Scripts to fetch translations from bab.la, tyda.se
 folkets lexikon and folkets synonymlexikon.
 
-
 DESCRIPTION
 
 The script svensk-engelsk.sh translates from Swedish
-to English. There are also a number of symlinks to thet
+to English. There are also a number of symlinks to that
 script to translates between other from-to language
 combinations. To add a new one check what combinations
 bab.la supports and create a new symlink.
@@ -14,7 +13,7 @@ To fetch translations from tyda.se, use the script tyda.sh.
 The site tries to determine source language automatically
 and translates from/to English/Swedish.
 
-Folkets lexikon is a free Swedish English lekikon maintaned
+Folkets lexikon is a free Swedish/English dictionary maintaned
 by KTH. http://folkets-lexikon.csc.kth.se/folkets/om.html
 The folkets_lexikon_* scripts fetch translations from
 local XML-files that can be downloaded from KTH using the
@@ -23,7 +22,7 @@ method to fetch synonyms from folkets synonymlexikon.
 
 Finally babla.tcl is an Eggdrop script that calls the
 other scripts when commands are given in a channel the
-bot is logged on. The commands are:
+bot is logged on to. The commands are:
 
 !babla   - svensk-engelsk.sh
 !tyda    - tyda.sh
@@ -32,14 +31,12 @@ bot is logged on. The commands are:
 !folken  - folkets_lexikon_ensv.py
 !folksyn - folkets_syn.py
 
-
 REQUIREMENTS
 
 The scripts call:
 - html2text - https://github.com/aaronsw/html2text
 - perl
 - python (2.5+ for xml parsing, only tried with 2.7.x)
-
 
 EXAMPLES
 
@@ -79,3 +76,16 @@ to English (or Swedish) from tyda.se of
 the word 'rymdraket':
 
 ./tyda.sh rymdraket
+
+Get synonyms for 'gräva' on irc-channel:
+
+17:11 <@albert> !folksyn gräva
+17:11 < botwin> albert: böka upp
+17:11 < botwin> snoka
+17:11 < botwin> undersöka
+
+For the last example to work the eggdrop bot botwin
+should have loaded babla.tcl. Add a line like this
+(change path first) to eggdrop.conf:
+
+source /home/albert/source/babla/babla.tcl
